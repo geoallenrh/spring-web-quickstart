@@ -21,6 +21,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import org.eclipse.microprofile.metrics.annotation.Counted;
+import org.eclipse.microprofile.metrics.annotation.Timed;
+import org.eclipse.microprofile.metrics.MetricUnits;
+//import org.eclipse.microprofile.metrics.annotation.Gauge;
+
 @RestController
 @RequestMapping("/greeting")
 public class GreetingController {
@@ -31,6 +36,8 @@ public class GreetingController {
         this.greetingBean = greetingBean;
     }
 
+    @Counted(name = "time.now")
+    @Timed(name = "checksTimer", description = "A measure of how long it takes to perform the .", unit = MetricUnits.MILLISECONDS)
     @GetMapping("/{name}")
     public Greeting hello(@PathVariable(name = "name") String name) {
         return new Greeting(greetingBean.greet(name));
