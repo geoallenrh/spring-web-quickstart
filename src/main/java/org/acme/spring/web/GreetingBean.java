@@ -22,6 +22,6 @@ import org.springframework.stereotype.Service;
 public class GreetingBean {
 
     public String greet(String input) {
-        return "HELLO " + input.toUpperCase() + ", It's a wonderful day!";
+        return "HELLO " + input.toUpperCase() + ", It's a tekton day!";
     }
 }
